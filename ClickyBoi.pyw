@@ -1,5 +1,5 @@
 """
-Clicks both mouse buttons for 1 ms +/1 0.1ms every 5 min +/- 3 min
+Clicks both mouse buttons for 1-10 ms every 3-8 min
 
 Author: Chris Appier
 Created: 09/09/2022
@@ -9,7 +9,6 @@ import time
 import random
 import mouse
 import tkinter as tk
-from tkinter import tix
 from threading import Thread
 
 #%% Functions
@@ -45,7 +44,6 @@ def stop():
 
 #%% Variables
 loop = 1
-
 
 #%% Populating Window
 window = tk.Tk()
