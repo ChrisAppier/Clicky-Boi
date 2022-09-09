@@ -17,6 +17,8 @@ def start_thread():
     
     loop = 0
     
+    start_button.configure(bg='green')
+    
     t = Thread (target=clicking)
     t.start()
 
@@ -41,6 +43,8 @@ def clicking():
 def stop():
     global loop
     loop = 1
+    
+    start_button.configure(bg='SystemButtonFace')
 
 #%% Variables
 loop = 1
@@ -51,7 +55,8 @@ window.title('Clicky Boi')
 window.geometry('100x50+50+50')
 window.resizable(False, False)
 
-start_button = tk.Button(window, text = 'Start', width = 10, command=start_thread).pack()
+start_button = tk.Button(window, text = 'Start', width = 10, command=start_thread)
+start_button.pack()
 stop_button = tk.Button(window, text = 'Stop', width = 10, command=stop).pack()
 
 window.mainloop()
