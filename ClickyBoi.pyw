@@ -26,7 +26,7 @@ def start():
         mouse.press(button = 'right')
 
 def stop():
-    loop = 0
+    loop = 1
 
 #%% Variables
 loop = 1
