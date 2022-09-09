@@ -10,34 +10,50 @@ import random
 import mouse
 import tkinter as tk
 from tkinter import tix
+from threading import Thread
 
 #%% Functions
-def start():
+def start_thread():
+    global loop
+    
+    loop = 0
+    
+    t = Thread (target=clicking)
+    t.start()
 
+def clicking():
+    global loop
+    
     while loop == 0:
         wait = random.randrange(180,480,1)
         sleep = random.randrange(1,10,1)/100
 
         time.sleep(wait)
-        mouse.press(button = 'left')
-        mouse.press(button = 'right')
+        
+        if loop == 1:
+            break
+        
+        mouse.hold(button = 'left')
+        mouse.hold(button = 'right')
         time.sleep(sleep)
-        mouse.press(button = 'left')
-        mouse.press(button = 'right')
+        mouse.release(button = 'left')
+        mouse.release(button = 'right')
 
 def stop():
+    global loop
     loop = 1
 
 #%% Variables
 loop = 1
 
+
 #%% Populating Window
-window = tix.Tk()
+window = tk.Tk()
 window.title('Clicky Boi')
-window.geometry('100x300+50+50')
+window.geometry('100x50+50+50')
 window.resizable(False, False)
 
-start_button = tk.Button(window, text = 'Start', width = 10, command=start)
-start_button.pack()
-stop_button = tk.Button(window, text = 'Stop', width = 10, command=stop)
-stop_button.pack()
+start_button = tk.Button(window, text = 'Start', width = 10, command=start_thread).pack()
+stop_button = tk.Button(window, text = 'Stop', width = 10, command=stop).pack()
+
+window.mainloop()
