@@ -15,11 +15,10 @@ from threading import Thread
 def start_thread():
     global loop
     
-    loop = 0
+    loop.set(0)
     
     start_button.configure(bg='green')
     
-    t = Thread (target=clicking)
     t.start()
 
 def clicking():
@@ -27,6 +26,7 @@ def clicking():
     
     while loop == 0:
         wait = random.randrange(180,480,1)
+        print(wait)
         sleep = random.randrange(1,10,1)/100
 
         time.sleep(wait)
@@ -42,15 +42,23 @@ def clicking():
 
 def stop():
     global loop
-    loop = 1
+    loop.set(1)
     
     start_button.configure(bg='SystemButtonFace')
+    
+def closing():
+    global loop
+    
+    loop.set(1)
+    window.destroy()
 
 #%% Variables
-loop = 1
+window = tk.Tk()
+loop = tk.IntVar()
+loop.set(1)
+t = Thread(target=clicking)
 
 #%% Populating Window
-window = tk.Tk()
 window.title('Clicky Boi')
 window.geometry('100x50+50+50')
 window.resizable(False, False)
@@ -59,4 +67,7 @@ start_button = tk.Button(window, text = 'Start', width = 10, command=start_threa
 start_button.pack()
 stop_button = tk.Button(window, text = 'Stop', width = 10, command=stop).pack()
 
+
+window.protocol('WM_DELETE_WINDOW', closing)
 window.mainloop()
+
