@@ -13,25 +13,21 @@ from threading import Thread
 
 #%% Functions
 def start_thread():
-    global loop
-    
     loop.set(0)
     
     start_button.configure(bg='green')
     
     t.start()
 
-def clicking():
-    global loop
-    
-    while loop == 0:
+def clicking():  
+    while loop.get() == 0:
         wait = random.randrange(180,480,1)
         print(wait)
         sleep = random.randrange(1,10,1)/100
 
         time.sleep(wait)
         
-        if loop == 1:
+        if loop.get() == 1:
             break
         
         mouse.hold(button = 'left')
@@ -41,7 +37,6 @@ def clicking():
         mouse.release(button = 'right')
 
 def stop():
-    global loop
     loop.set(1)
     
     start_button.configure(bg='SystemButtonFace')
