@@ -45,12 +45,6 @@ def stop():
     loop.set(1)
     
     start_button.configure(bg='SystemButtonFace')
-    
-def closing():
-    global loop
-    
-    loop.set(1)
-    window.destroy()
 
 #%% Variables
 window = tk.Tk()
@@ -67,7 +61,7 @@ start_button = tk.Button(window, text = 'Start', width = 10, command=start_threa
 start_button.pack()
 stop_button = tk.Button(window, text = 'Stop', width = 10, command=stop).pack()
 
-
-window.protocol('WM_DELETE_WINDOW', closing)
 window.mainloop()
+
+loop.set(1)
 
